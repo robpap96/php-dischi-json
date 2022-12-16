@@ -30,18 +30,30 @@ Solo a questo punto sarà utile passare alla lettura della lista da un file JSON
         </div>
 
         <script>
-          const { createApp } = Vue
-        
-          createApp({
-            data() {
-              return {
+        "use strict";
 
-              }
-            },
-            created() {
-                axios.get()
-            }
-          }).mount('#app')
+        const { createApp } = Vue
+          
+            createApp({
+                data() {
+                    return {
+                        films: [],
+                    }
+                },
+                created() {
+                    const params = {
+                        title: '',
+                        author: '',
+                        year: '',
+                        poster: '',
+                        genre: '',
+                    };
+
+                    axios.get('http://localhost:8888/php-dischi-json/dischi.json', {params}).then( (response)=> {
+                        this.films = response.data;
+                    });
+                },
+            }).mount('#app')
         </script>
 
     </body>
